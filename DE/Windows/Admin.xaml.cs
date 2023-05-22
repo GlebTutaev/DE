@@ -35,13 +35,16 @@ namespace DE.Windows
         {
 
             TradeEntities db = new TradeEntities();
+
+
             List<Product> product = db.Products.ToList();
             product.ForEach(x =>
             {
                 x.ProductStatus = x.ProductQuantityInStock > 0 ? "В наличии" : "Отсутствует";
             });
             ListProduct.ItemsSource = product;
-            
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -56,26 +59,29 @@ namespace DE.Windows
                 db.SaveChanges();
                 Window_Loaded(sender, e);
 
-            }             
+            }
             catch {
                 var p = db.Products.Where(x => x.ProductArticleNumber == i.ProductArticleNumber).Single();
                 db.Products.Remove(p);
                 db.SaveChanges();
                 Window_Loaded(sender, e);
             }
-            
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             AddForm addForm = new AddForm();
-            addForm.Show(); 
+            addForm.Show();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            TradeEntities db = new TradeEntities();
+            var history = db.Products.ToList();
+            ListProduct.ItemsSource = history;
+            ListProduct.ItemsSource = db.Products.Where(x => x.ProductName.StartsWith(Search.Text) || x.ProductDescription.StartsWith(Search.Text)).ToList();
 
-            Window_Loaded(sender, e);
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)

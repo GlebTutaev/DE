@@ -20,7 +20,7 @@
             <Label x:Name="UserSurname" Height="35" Width="120" HorizontalAlignment="Right"/>
         </StackPanel>
         <TextBox x:Name="Search" Grid.Row="1" Width=" 400" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="1" Margin="0,40,0,0">
             <StackPanel Orientation="Vertical">
                 <ListBox Name="ListProduct" Width="650">
                     <ListBox.ItemTemplate>
